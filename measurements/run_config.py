@@ -8,7 +8,13 @@ def parse_config(file_path):
     config = {}
     with open(file_path, 'r') as f:
         for line in f:
-            key, value = line.strip().split('=')
+            line = line.strip()
+            if line.startswith("#"):
+                continue
+            if not line:
+                continue
+                
+            key, value = line.split('=')
             config[key] = list(map(str, value.split(',')))
     return config
 
